@@ -1,0 +1,1114 @@
+#
+# THE EVENT-LIST FILE
+# 
+# This file looks more complicated, than it is.
+# Each event got at least 8 entries. Each entry displays the name of the Event first, followed by 
+# the type of what is to be modified, a value and a flag, that will be explained later on.
+# The entries are:
+#   type: not supported yet, but should be kept
+#   chance: how likely is it, that the event happens (percentage)
+#   mod: the value, chance is modified by every year.
+#   modDone: the value the chance is modified by, after it happened (the chance is first set to 0
+#      and afterwards modified with modDone
+#   vitality: the value, the vitality of the area is modified when the event takes place
+#   agressivity, health and military: like vitality. All four can be negative or x:Number
+#      x:Number is not yet supported but shall be once a +- modificator
+# In addition, each Entry can hold any number of additional entries. These describe modifications
+# to other events. For example becomes it more likely, that a Library is destroyed, after one has
+# been build. All these entries got a flag of 1 instead of 0 like the standard entries.
+# There are two additional entries possible: war and treaty. If one of theses entries is given
+# and set to 1, the entry will be treated as a war or treaty (in case of treaty, a 2 can be set
+# which signals a trade treaty. At least one additional entry must be present.
+# Two special entries are follow and precurser. An event, that got the precurser-entry will 
+# set a flag for another Event, that is marked with follow. The follow-event may only happen,
+# if the right flag is set beforhand. (look at Libary is Build and Library is Destroyed)
+# Setting links: Minor Work of Art;hl;http://www.orfinlir.de;0 
+#    (hl stands for hyper-link)
+# asking for a name: Prophet
+# Empty rows and all rows beginning with # are ignored by the program.
+# The objects of the historyEngine are able to handle more than one eventFile conqurently, adding
+# all events of all files and overwriting events put in first with events of the same name
+# from later files.
+# Thanks for the links goes to: the ENWorld 1000-Links Thread,
+
+Prophet;type;1;0
+Prophet;chance;0.2;0
+Prophet;mod;0.1;0
+Prophet;modDone;0.5;0
+Prophet;vitality;x;0
+Prophet;agressivity;x;0
+Prophet;health;5;0
+Prophet;military;5;0
+Prophet;hl;http://www.fordham.edu/halsall/sbook.html;0
+Prophet;Library is Build;5;1
+
+Library is Build;type;1;0
+Library is Build;chance0.001;0
+Library is Build;mod;0.001;0
+Library is Build;modDone;-4;0
+Library is Build;vitality;7;0
+Library is Build;agressivity;-5;0
+Library is Build;health;5;0
+Library is Build;military;5;0
+Library is Build;Prophet;3;1
+Library is Build;precurser;1;0
+Library is Build;New Philosophy;5;1
+Library is Build;Minor Work of Art;20;1
+
+Library is Destroyed;type;1;0
+Library is Destroyed;chance;3;0
+Library is Destroyed;mod;0.5;0
+Library is Destroyed;modDone;0;0
+Library is Destroyed;vitality;x;0
+Library is Destroyed;agressivity;10;0
+Library is Destroyed;health;-5;0
+Library is Destroyed;military;-5;0
+Library is Destroyed;follows;Library is Build;0
+Library is Destroyed;Prophet;2;1
+Library is Destroyed;Library is Build;1;1
+
+Technical Invention;type;1;0
+Technical Invention;chance;0.2;0
+Technical Invention;mod;0.2;0
+Technical Invention;modDone;1;0
+Technical Invention;vitality;3;0
+Technical Invention;agressivity;1;0
+Technical Invention;health;2;0
+Technical Invention;military;2;0
+Technical Invention;Library is Build;0.5;1
+
+Military Invention;type;1;0
+Military Invention;chance;0.5;0
+Military Invention;mod;0.3;0
+Military Invention;modDone;1;0
+Military Invention;vitality;3;0
+Military Invention;agressivity;5;0
+Military Invention;health;0;0
+Military Invention;military;5;0
+Military Invention;War;1;1
+
+New Philosophy;type;1;0
+New Philosophy;chance;0.5;0
+New Philosophy;mod;0.2;0
+New Philosophy;modDone;1;0
+New Philosophy;vitality;5;0
+New Philosophy;agressivity;-5;0
+New Philosophy;health;5;0
+New Philosophy;military;2;0
+New Philosophy;hl;http://www.utm.edu/research/iep/;0
+New Philosophy;Library is Build;6;1
+
+Major Work of Art;type;1;0
+Major Work of Art;chance;0.1;0
+Major Work of Art;mod;0.1;0
+Major Work of Art;modDone;5;0
+Major Work of Art;vitality;3;0
+Major Work of Art;agressivity;-3;0
+Major Work of Art;health;3;0
+Major Work of Art;military;-1;0
+Major Work of Art;Minor Work of Art;5;1
+
+Minor Work of Art;type;1;0
+Minor Work of Art;chance;0.5;0
+Minor Work of Art;mod;0.5;0
+Minor Work of Art;modDone;10;0
+Minor Work of Art;vitality;2;0
+Minor Work of Art;agressivity;-1;0
+Minor Work of Art;health;0;0
+Minor Work of Art;military;0;0
+Minor Work of Art;hl;http://mv.vatican.va/3_EN/pages/MV_Home.html;0
+Minor Work of Art;Major Work of Art;2;1
+
+Immigration;type;1;0
+Immigration;chance;1;0
+Immigration;mod;0.5;0
+Immigration;modDone;2;0
+Immigration;vitality;5;0
+Immigration;agressivity;5;0
+Immigration;health;-2;0
+Immigration;military;-3;0
+Immigration;Minor Work of Art;1;1
+
+War;type;1;0
+War;chance;0.5;0
+War;mod;0.5;0
+War;modDone;-5;0
+War;vitality;1;0
+War;agressivity;5;0
+War;health;-5;0
+War;military;10;0
+War;Military Invention;5;1
+War;war;1;0
+War;Legendary Victory;3;1
+War;hl;http://www.hillsdale.edu/dept/History/War/index.htm;0
+War;Legendary Lost Battle;3;1
+
+Treaty;type;1;0
+Treaty;chance;0.2;0
+Treaty;mod;0.2;0
+Treaty;modDone;-5;0
+Treaty;vitality;2;0
+Treaty;agressivity;-5;0
+Treaty;health;3;0
+Treaty;military;-1;0
+Treaty;War;-3;1
+Treaty;treaty;1;0
+Treaty;Military Invention;-1;1
+
+Trade Treaty;type;1;0
+Trade Treaty;chance;0.1;0
+Trade Treaty;mod;0.1;0
+Trade Treaty;modDone;0;0
+Trade Treaty;vitality;2;0
+Trade Treaty;agressivity;-5;0
+Trade Treaty;health;3;0
+Trade Treaty;military;2;0
+Trade Treaty;War;-1;1
+Trade Treaty;hl;http://historymedren.about.com/cs/medievaleconomics/;0
+Trade Treaty;treaty;2;0
+
+Traderoute;type;1;0
+Traderoute;chance;0.1;0
+Traderoute;mod;0.1;0
+Traderoute;modDone;0;0
+Traderoute;vitality;3;0
+Traderoute;agressivity0;0
+Traderoute;health;2;0
+Traderoute;military;1;0
+Traderoute;Treaty;2;1
+Traderoute;hl;http://www.ciolek.com/owtrad.html;0
+Traderoute;New Philosophy;3;1
+
+City founded;type;1;0
+City founded;chance;0.2;0
+City founded;mod;0.2;0
+City founded;modDone;-5;0
+City founded;vitality;;0
+City founded;agressivity;-2;0
+City founded;health;5;0
+City founded;military;1;0
+City founded;hl;http://www.hut.fi/~vesanto/link.useful/worlds/citysize.html;0
+City founded;Library is Build;1;1
+
+Loss of Land;type;1;0
+Loss of Land;chance;0.2;0
+Loss of Land;mod;0.2;0
+Loss of Land;modDone;-5;0
+Loss of Land;vitality;0;0
+Loss of Land;agressivity;3;0
+Loss of Land;health;-2;0
+Loss of Land;military;-3;0
+Loss of Land;War;5;1
+
+Gaining of Land;type;1;0
+Gaining of Land;chance;0.2;0
+Gaining of Land;mod;0.2;0
+Gaining of Land;modDone;-10;0
+Gaining of Land;vitality;5;0
+Gaining of Land;agressivity;0;0
+Gaining of Land;health;5;0
+Gaining of Land;military;1;0
+Gaining of Land;Minor Work of Art;2;1
+
+Channel Build;type;1;0
+Channel Build;chance;0.1;0
+Channel Build;mod;0.1;0
+Channel Build;modDone;0;0
+Channel Build;vitality;5;0
+Channel Build;agressivity;0;0
+Channel Build;health;2;0
+Channel Build;military;;0
+Channel Build;War;-3;1
+Channel Build;Trade Treaty;2;1
+
+Great General;type;1;0
+Great General;chance;0.05;0
+Great General;mod;0.05;0
+Great General;modDone;0;0
+Great General;vitality;0;0
+Great General;agressivity;2;0
+Great General;health;3;0
+Great General;military;5;0
+Great General;Military Invention;3;1
+Great General;Legendary Victory;3;1
+Great General;Legendary Lost Battle;3;1
+
+Legendary Victory;type;1;0
+Legendary Victory;chance;0.1;0
+Legendary Victory;mod;0.1;0
+Legendary Victory;modDone;-5;0
+Legendary Victory;vitality;2;0
+Legendary Victory;agressivity;0;0
+Legendary Victory;health;5;0
+Legendary Victory;military;0;0
+Legendary Victory;War;3;1
+
+Legendary Lost Battle;type;1;0
+Legendary Lost Battle;chance;0.1;0
+Legendary Lost Battle;mod;0.1;0
+Legendary Lost Battle;modDone;-5;0
+Legendary Lost Battle;vitality;-2;0
+Legendary Lost Battle;agressivity;2;0
+Legendary Lost Battle;health;-3;0
+Legendary Lost Battle;military;2;0
+Legendary Lost Battle;War;3;1
+
+Rebellion Ends;type;1;0
+Rebellion Ends;chance;0.1;0
+Rebellion Ends;mod;0.1;0
+Rebellion Ends;modDone;-5;0
+Rebellion Ends;vitality;5;0
+Rebellion Ends;agressivity;-3;0
+Rebellion Ends;health;1;0
+Rebellion Ends;military;-2;0
+Rebellion Ends;follows;Rebellion;2
+Rebellion Ends;New Philosophy;1;1
+
+Earthquake;type;1;0
+Earthquake;chance;0.1;0
+Earthquake;mod;0.1;0
+Earthquake;modDone;-1;0
+Earthquake;vitality;-1;0
+Earthquake;agressivity;-1;0
+Earthquake;health;-5;0
+Earthquake;military;-1;0
+Earthquake;War;-3;1
+Earthquake;Prophet;2;1
+Earthquake;Epidemic;2;1
+
+Flood;type;1;0
+Flood;chance;0.1;0
+Flood;mod;0.1;0
+Flood;modDone;-1;0
+Flood;vitality;-2;0
+Flood;agressivity;-1;0
+Flood;health;-5;0
+Flood;military;-1;0
+Flood;War;-3;1
+Flood;Prophet;2;1
+Flood;Epidemic;21;1
+
+Epidemic;type;1;0
+Epidemic;chance;0.1;0
+Epidemic;mod;0.1;0
+Epidemic;modDone;2;0
+Epidemic;vitality;-5;0
+Epidemic;agressivity;4;0
+Epidemic;health;-5;0
+Epidemic;military;-3;0
+Epidemic;Prophet;2;1
+
+Forest Fire;type;1;0
+Forest Fire;chance;0.1;0
+Forest Fire;mod;0.1;0
+Forest Fire;modDone;-5;0
+Forest Fire;vitality;-1;0
+Forest Fire;agressivity;0;0
+Forest Fire;health;0;0
+Forest Fire;military;-1;0
+Forest Fire;Prophet;2;1
+
+Murder of Ruler;type;1;0
+Murder of Ruler;chance;0.05;0
+Murder of Ruler;mod;0.01;0
+Murder of Ruler;modDone;1;0
+Murder of Ruler;vitality;-1;0
+Murder of Ruler;agressivity;1;0
+Murder of Ruler;health;0;0
+Murder of Ruler;military;0;0
+Murder of Ruler;War;3;1
+
+Strange Omens;type;1;0
+Strange Omens;chance;0.02;0
+Strange Omens;mod;0.02;0
+Strange Omens;modDone;4;0
+Strange Omens;vitality;1;0
+Strange Omens;agressivity;0;0
+Strange Omens;health;1;0
+Strange Omens;military;1;0
+Strange Omens;hl;http://www.sacred-texts.com/nos/index.htm;0
+Strange Omens;Prophet;0.5;1
+
+New Dynasty;type;1;0
+New Dynasty;chance;0.1;0
+New Dynasty;mod;0.05;0
+New Dynasty;modDone;-4;0
+New Dynasty;vitality;3;0
+New Dynasty;agressivity;5;0
+New Dynasty;health;1;0
+New Dynasty;military;3;0
+New Dynasty;Old Dynasty regains control;1;1
+
+New Religion founded;type;1;0
+New Religion founded;chance;0.01;0
+New Religion founded;mod;0.01;0
+New Religion founded;modDone;-4;0
+New Religion founded;vitality;5;0
+New Religion founded;agressivity;4;0
+New Religion founded;health;-1;0
+New Religion founded;military;0;0
+New Religion founded;New Dynasty;2;1
+New Religion founded;hl;http://religion-cults.com/;0
+New Religion founded;Rebellion Ends;-4;1
+
+Old Dynasty regains control;type;1;0
+Old Dynasty regains control;chance;-1;0
+Old Dynasty regains control;mod;0.01;0
+Old Dynasty regains control;modDone;-20;0
+Old Dynasty regains control;vitality;2;0
+Old Dynasty regains control;agressivity;0;0
+Old Dynasty regains control;health;1;0
+Old Dynasty regains control;military;0;0
+Old Dynasty regains control;War;1;1
+Old Dynasty regains control;Rebellion Ends;-4;1
+
+Revolt;type;1;0
+Revolt;chance;0.1;0
+Revolt;mod;0.1;0
+Revolt;modDone;-1;0
+Revolt;vitality;4;0
+Revolt;agressivity;5;0
+Revolt;health;-5;0
+Revolt;military;5;0
+Revolt;War;3;1
+
+Shism;type;1;0
+Shism;chance;0.001;0
+Shism;mod;0.005;0
+Shism;modDone;-5;0
+Shism;vitality;-3;0
+Shism;agressivity;2;0
+Shism;health;0;0
+Shism;military;0;0
+Shism;Prophet;2;1
+
+A Religion dies;type;1;0
+A Religion dies;chance;0.01;0
+A Religion dies;mod;0.01;0
+A Religion dies;modDone;-5;0
+A Religion dies;vitality;-1;0
+A Religion dies;agressivity;-1;0
+A Religion dies;health;0;0
+A Religion dies;military;1;0
+A Religion dies;New Political System;1;1
+
+Barbarian Invaders;type;1;0
+Barbarian Invaders;chance;0.1;0
+Barbarian Invaders;mod;0.1;0
+Barbarian Invaders;modDone;-20;0
+Barbarian Invaders;vitality;-30;0
+Barbarian Invaders;agressivity;-30;0
+Barbarian Invaders;health;-30;0
+Barbarian Invaders;military;5;0
+Barbarian Invaders;War;-50;1
+Barbarian Invaders;hl;http://www.lacma.org/khan/index.htm;0
+Barbarian Invaders;Military Invention;5;1
+
+New Political System;type;1;0
+New Political System;chance;0.1;0
+New Political System;mod;0.1;0
+New Political System;modDone;0;0
+New Political System;vitality;5;0
+New Political System;agressivity;2;0
+New Political System;health;0;0
+New Political System;military;2;0
+New Political System;hl;http://dspace.dial.pipex.com/town/street/pl38/sect2.htm;0
+New Political System;War;1;1
+
+Army Uprising;type;1;0
+Army Uprising;chance;0.1;0
+Army Uprising;mod;0.1;0
+Army Uprising;modDone;1;0
+Army Uprising;vitality;-1;0
+Army Uprising;agressivity;1;0
+Army Uprising;health;-1;0
+Army Uprising;military;3;0
+Army Uprising;War;1;1
+
+New Road;type;1;0
+New Road;chance;0.1;0
+New Road;mod;0.1;0
+New Road;modDone;1;0
+New Road;vitality;5;0
+New Road;agressivity;-2;0
+New Road;health;2;0
+New Road;military;2;0
+New Road;Trade Treaty;2;1
+
+Food Failure;type;1;0
+Food Failure;chance;0.1;0
+Food Failure;mod;0.1;0
+Food Failure;modDone;2;0
+Food Failure;vitality;-5;0
+Food Failure;agressivity;3;0
+Food Failure;health;-2;0
+Food Failure;military;-2;0
+Food Failure;Revolt;2;1
+Food Failure;Epidemic;1;1
+Food Failure;Famine;2;1
+
+Great Harvest;type;1;0
+Great Harvest;chance;0.1;0
+Great Harvest;mod;0.1;0
+Great Harvest;modDone;0;0
+Great Harvest;vitality;5;0
+Great Harvest;agressivity;-2;0
+Great Harvest;health;5;0
+Great Harvest;military;2;0
+Great Harvest;City founded;2;1
+
+Scientific Invention;type;1;0
+Scientific Invention;chance;0.01;0
+Scientific Invention;mod;0.01;0
+Scientific Invention;modDone;-2;0
+Scientific Invention;vitality;2;0
+Scientific Invention;agressivity;1;0
+Scientific Invention;health;5;0
+Scientific Invention;military;-1;0
+Scientific Invention;Great Harvest;1;1
+
+Victorious Conquest;type;1;0
+Victorious Conquest;chance;0.01;0
+Victorious Conquest;mod;0.01;0
+Victorious Conquest;modDone;0;0
+Victorious Conquest;vitality;1;0
+Victorious Conquest;agressivity;3;0
+Victorious Conquest;health;3;0
+Victorious Conquest;military;3;0
+Victorious Conquest;War;1;1
+
+Exploration-Travel;type;1;0
+Exploration-Travel;chance;0.01;0
+Exploration-Travel;mod;0.01;0
+Exploration-Travel;modDone;-1;0
+Exploration-Travel;vitality;2;0
+Exploration-Travel;agressivity;1;0
+Exploration-Travel;health;3;0
+Exploration-Travel;military;0;0
+Exploration-Travel;Trade Treaty;2;1
+
+Enemy Destroyed Permanently;type;1;0
+Enemy Destroyed Permanently;chance;0.01;0
+Enemy Destroyed Permanently;mod;0.01;0
+Enemy Destroyed Permanently;modDone;-10;0
+Enemy Destroyed Permanently;vitality;3;0
+Enemy Destroyed Permanently;agressivity;1;0
+Enemy Destroyed Permanently;health;3;0
+Enemy Destroyed Permanently;military;1;0
+Enemy Destroyed Permanently;Building of a Monument started;1;1
+
+City Sacced;type;1;0
+City Sacced;chance;0.01;0
+City Sacced;mod;0.01;0
+City Sacced;modDone;-10;0
+City Sacced;vitality;-2;0
+City Sacced;agressivity;5;0
+City Sacced;health;-1;0
+City Sacced;military;2;0
+City Sacced;War;5;1
+City Sacced;Prophet;1;1
+
+Animal Epidemic;type;1;0
+Animal Epidemic;chance;0.01;0
+Animal Epidemic;mod;0.01;0
+Animal Epidemic;modDone;-10;0
+Animal Epidemic;vitality;-2;0
+Animal Epidemic;agressivity;-2;0
+Animal Epidemic;health;-5;0
+Animal Epidemic;military;-2;0
+Animal Epidemic;Famine;2;1
+
+Inspireing Ruler;type;1;0
+Inspireing Ruler;chance;0.01;0
+Inspireing Ruler;mod;0.01;0
+Inspireing Ruler;modDone;-10;0
+Inspireing Ruler;vitality;2;0
+Inspireing Ruler;agressivity;0;0
+Inspireing Ruler;health;5;0
+Inspireing Ruler;military;0;0
+Inspireing Ruler;War;-1;1
+
+Legendary Hero;type;1;0
+Legendary Hero;chance;0.01;0
+Legendary Hero;mod;0.01;0
+Legendary Hero;modDone;-10;0
+Legendary Hero;vitality;5;0
+Legendary Hero;agressivity;1;0
+Legendary Hero;health;2;0
+Legendary Hero;military;0;0
+Legendary Hero;Enemy Destroyed Permanently;2;1
+
+Famine;type;1;0
+Famine;chance;0.01;0
+Famine;mod;0.01;0
+Famine;modDone;0;0
+Famine;vitality;-2;0
+Famine;agressivity;2;0
+Famine;health;-4;0
+Famine;military;-1;0
+Famine;Prophet;1;1
+
+Building of a Cathedral started;type;1;0
+Building of a Cathedral started;chance;0.01;0
+Building of a Cathedral started;mod;0.01;0
+Building of a Cathedral started;modDone;0;0
+Building of a Cathedral started;vitality;1;0
+Building of a Cathedral started;agressivity;1;0
+Building of a Cathedral started;health;2;0
+Building of a Cathedral started;military;0;0
+Building of a Cathedral started;precurser;1;0
+Building of a Cathedral started;Shism;0.5;1
+
+Building of a Monument started;type;1;0
+Building of a Monument started;chance;0.01;0
+Building of a Monument started;mod;0.01;0
+Building of a Monument started;modDone;0;0
+Building of a Monument started;vitality;2;0
+Building of a Monument started;agressivity;0;0
+Building of a Monument started;health;2;0
+Building of a Monument started;military;1;0
+Building of a Monument started;precurser;1;0
+Building of a Monument started;hl;http://wmf.org/a/watchlist.htm;0
+Building of a Monument started;Famine;0.5;1
+
+Building of a Palace started;type;1;0
+Building of a Palace started;chance;0.01;0
+Building of a Palace started;mod;0.01;0
+Building of a Palace started;modDone;0;0
+Building of a Palace started;vitality;1;0
+Building of a Palace started;agressivity;1;0
+Building of a Palace started;health;1;0
+Building of a Palace started;military;1;0
+Building of a Palace started;precurser;1;0
+Building of a Palace started;Famine;1;1
+
+Building of a New Capital City started;type;1;0
+Building of a New Capital City started;chance;0.005;0
+Building of a New Capital City started;mod;0.005;0
+Building of a New Capital City started;modDone;-5;0
+Building of a New Capital City started;vitality;2;0
+Building of a New Capital City started;agressivity;1;0
+Building of a New Capital City started;health;1;0
+Building of a New Capital City started;military;0;0
+Building of a New Capital City started;precurser;1;0
+Building of a New Capital City started;Building of a Monument started;1;1
+
+Building of a Cathedral finished;type;1;0
+Building of a Cathedral finished;chance;0.1;0
+Building of a Cathedral finished;mod;0.1;0
+Building of a Cathedral finished;modDone;0;0
+Building of a Cathedral finished;vitality;2;0
+Building of a Cathedral finished;agressivity;0;0
+Building of a Cathedral finished;health;2;0
+Building of a Cathedral finished;military;0;0
+Building of a Cathedral finished;follows;Building of a Cathedral started;0
+Building of a Cathedral finished;Prophet;1;1
+
+Building of a Monument finished;type;1;0
+Building of a Monument finished;chance;1;0
+Building of a Monument finished;mod;0.1;0
+Building of a Monument finished;modDone;0;0
+Building of a Monument finished;vitality;2;0
+Building of a Monument finished;agressivity;-2;0
+Building of a Monument finished;health;2;0
+Building of a Monument finished;military;0;0
+Building of a Monument finished;follows;Building of a Monument started;0
+Building of a Monument finished;Minor Work of Art;1;1
+
+Building of a Palace finished;type;1;0
+Building of a Palace finished;chance;1;0
+Building of a Palace finished;mod;1;0
+Building of a Palace finished;modDone;0;0
+Building of a Palace finished;vitality;1;0
+Building of a Palace finished;agressivity;2;0
+Building of a Palace finished;health;0;0
+Building of a Palace finished;military;1;0
+Building of a Palace finished;follows;Building of a Palace started;0
+Building of a Palace finished;City founded;1;1
+
+Building of a New Capital City finished;type;1;0
+Building of a New Capital City finished;chance;1;0
+Building of a New Capital City finished;mod;0.1;0
+Building of a New Capital City finished;modDone;0;0
+Building of a New Capital City finished;vitality;1;0
+Building of a New Capital City finished;agressivity;0;0
+Building of a New Capital City finished;health;2;0
+Building of a New Capital City finished;military;1;0
+Building of a New Capital City finished;follows;Building of a New Capital City started;0
+Building of a New Capital City finished;Building of a Monument started;1;1
+
+Important Wedding;type;1;0
+Important Wedding;chance;0.01;0
+Important Wedding;mod;0.01;0
+Important Wedding;modDone;0;0
+Important Wedding;vitality;2;0
+Important Wedding;agressivity;-4;0
+Important Wedding;health;4;0
+Important Wedding;military;0;0
+Important Wedding;hl;http://www.ukans.edu/history/ftp/primary_texts/marriage.txt;0
+Important Wedding;Important Birth;4;1
+
+Important Birth;type;1;0
+Important Birth;chance;0.01;0
+Important Birth;mod;0.01;0
+Important Birth;modDone;0;0
+Important Birth;vitality;4;0
+Important Birth;agressivity;-2;0
+Important Birth;health;4;0
+Important Birth;military;-1;0
+Important Birth;Important Wedding;1;1
+
+Comet sighted;type;1;0
+Comet sighted;chance;0.001;0
+Comet sighted;mod;0.001;0
+Comet sighted;modDone;-2;0
+Comet sighted;vitality;-4;0
+Comet sighted;agressivity;2;0
+Comet sighted;health;-1;0
+Comet sighted;military;1;0
+Comet sighted;Prophet;0.5;1
+
+National Games;type;1;0
+National Games;chance;0.01;0
+National Games;mod;0.01;0
+National Games;modDone;1;0
+National Games;vitality;1;0
+National Games;agressivity;-2;0
+National Games;health;3;0
+National Games;military;1;0
+National Games;International Games;1;1
+
+International Games;type;1;0
+International Games;chance;0.01;0
+International Games;mod;0.01;0
+International Games;modDone;1;0
+International Games;vitality;2;0
+International Games;agressivity;-2;0
+International Games;health;3;0
+International Games;military;0;0
+International Games;Trade Treaty;1;1
+
+Tradewar;type;1;0
+Tradewar;chance;0.01;0
+Tradewar;mod;0.01;0
+Tradewar;modDone;0;0
+Tradewar;vitality;-4;0
+Tradewar;agressivity;1;0
+Tradewar;health;-1;0
+Tradewar;military;0;0
+Tradewar;Traderoute closed;1;1
+
+Bandit Activity;type;1;0
+Bandit Activity;chance;0.1;0
+Bandit Activity;mod;0.05;0
+Bandit Activity;modDone;0.1;0
+Bandit Activity;vitality;-2;0
+Bandit Activity;agressivity;1;0
+Bandit Activity;health;-1;0
+Bandit Activity;military;1;0
+Bandit Activity;Reward offered for Criminal;2;1
+
+Monster activity;type;1;0
+Monster Activity;chance;0.1;0
+Monster Activity;mod;0.05;0
+Monster Activity;modDone;0.1;0
+Monster Activity;vitality;-2;0
+Monster Activity;agressivity;1;0
+Monster Activity;health;-1;0
+Monster Activity;military;1;0
+Monster Activity;Legendary Hero;1;1
+
+Traderoute closed;type;1;0
+Traderoute closed;chance;0.01;0
+Traderoute closed;mod;0.02;0
+Traderoute closed;modDone;-2;0
+Traderoute closed;vitality;-1;0
+Traderoute closed;agressivity;1;0
+Traderoute closed;health;-1;0
+Traderoute closed;military;1;0
+Traderoute closed;Monster Activity;1;1
+
+Important Person is missing;type;1;0
+Important Person is missing;chance;0.01;0
+Important Person is missing;mod;0.01;0
+Important Person is missing;modDone;0;0
+Important Person is missing;vitality;-2;0
+Important Person is missing;agressivity;1;0
+Important Person is missing;health;0;0
+Important Person is missing;military;1;0
+Important Person is missing;precurser;1;0
+Important Person is missing;Reward offered for Rescue;1;1
+
+Important Person is found;type;1;0
+Important Person is found;chance;10;0
+Important Person is found;mod;2;0
+Important Person is found;modDone;0;0
+Important Person is found;vitality;1;0
+Important Person is found;agressivity;-1;0
+Important Person is found;health;3;0
+Important Person is found;military;-1;0
+Important Person is found;follows;Important Person is missing;0
+Important Person is found;Reward offered for Criminal;1;1
+
+Missed Important Person is dead;type;1;0
+Missed Important Person is dead;chance;10;0
+Missed Important Person is dead;mod;2;0
+Missed Important Person is dead;modDone;0;0
+Missed Important Person is dead;vitality;-2;0
+Missed Important Person is dead;agressivity;1;0
+Missed Important Person is dead;health;-1;0
+Missed Important Person is dead;military;1;0
+Missed Important Person is dead;follows;Important Person is missing;0
+Missed Important Person is dead;Reward offered for Criminal;1;1
+
+Strange Sight discovered;type;1;0
+Strange Sight discovered;chance;0.01;0
+Strange Sight discovered;mod;0.01;0
+Strange Sight discovered;modDone;0;0
+Strange Sight discovered;vitality;0;0
+Strange Sight discovered;agressivity;0;0
+Strange Sight discovered;health;1;0
+Strange Sight discovered;military;1;0
+Strange Sight discovered;Strange Omens;1;1
+
+Major Criminal caught;type;1;0
+Major Criminal caught;chance;0.01;0
+Major Criminal caught;mod;0.01;0
+Major Criminal caught;modDone;-2;0
+Major Criminal caught;vitality;1;0
+Major Criminal caught;agressivity;-2;0
+Major Criminal caught;health;2;0
+Major Criminal caught;military;-1;0
+Major Criminal caught;Revolt;0.5;1
+
+Famous Artis emerges;type;1;0
+Famous Artis emerges;chance;0.005;0
+Famous Artis emerges;mod;0.005;0
+Famous Artis emerges;modDone;3;0
+Famous Artis emerges;vitality;2;0
+Famous Artis emerges;agressivity;-2;0
+Famous Artis emerges;health;2;0
+Famous Artis emerges;military;0;0
+Famous Artis emerges;Major Work of Art;1;1
+
+Shipwreck;type;1;0
+Shipwreck;chance;0.01;0
+Shipwreck;mod;0.01;0
+Shipwreck;modDone;0;0
+Shipwreck;vitality;-1;0
+Shipwreck;agressivity;0;0
+Shipwreck;health;0;0
+Shipwreck;military;0;0
+Shipwreck;hl;http://www.discovery.com/stories/history/pirates/pirates.html;0
+Shipwreck;Tradewar;1;1
+
+Great Storm;type;1;0
+Great Storm;chance;0.01;0
+Great Storm;mod;0.01;0
+Great Storm;modDone;0;0
+Great Storm;vitality;-0.5;0
+Great Storm;agressivity;0;0
+Great Storm;health;-0.5;0
+Great Storm;military;-1;0
+Great Storm;Famine;0.5;1
+
+Major Fire;type;1;0
+Major Fire;chance;0.01;0
+Major Fire;mod;0.01;0
+Major Fire;modDone;0;0
+Major Fire;vitality;-0.5;0
+Major Fire;agressivity;0;0
+Major Fire;health;-0.5;0
+Major Fire;military;-1;0
+Major Fire;Forest Fire;0.5;1
+
+Hurricane;type;1;0
+Hurricane;chance;0.005;0
+Hurricane;mod;0.005;0
+Hurricane;modDone;0;0
+Hurricane;vitality;-1;0
+Hurricane;agressivity;0;0
+Hurricane;health;-1;0
+Hurricane;military;-2;0
+Hurricane;Great Storm;1;1
+
+Reward offered for Criminal;type;1;0
+Reward offered for Criminal;chance;0.01;0
+Reward offered for Criminal;mod;0.01;0
+Reward offered for Criminal;modDone;0;0
+Reward offered for Criminal;vitality;0.5;0
+Reward offered for Criminal;agressivity;0.5;0
+Reward offered for Criminal;health;0.5;0
+Reward offered for Criminal;military;0;0
+Reward offered for Criminal;hl;http://www.villainsupply.com/;0
+Reward offered for Criminal;Major Criminal caught;1;1
+
+Reward offered for Rescue;type;1;0
+Reward offered for Rescue;chance;0.01;0
+Reward offered for Rescue;mod;0.01;0
+Reward offered for Rescue;modDone;0;0
+Reward offered for Rescue;vitality;0.5;0
+Reward offered for Rescue;agressivity;1;0
+Reward offered for Rescue;health;0;0
+Reward offered for Rescue;military;0;0
+Reward offered for Rescue;War;0;1
+
+Reward offered for Retrieval;type;1;0
+Reward offered for Retrieval;chance;0.01;0
+Reward offered for Retrieval;mod;0.01;0
+Reward offered for Retrieval;modDone;0;0
+Reward offered for Retrieval;vitality;0.5;0
+Reward offered for Retrieval;agressivity;0;0
+Reward offered for Retrieval;health;9.5;0
+Reward offered for Retrieval;military;0;0
+Reward offered for Retrieval;War;0;1
+
+Complete abandonment of a Philosophy;type;1;0
+Complete abandonment of a Philosophy;chance;0.005;0
+Complete abandonment of a Philosophy;mod;0.005;0
+Complete abandonment of a Philosophy;modDone;-2;0
+Complete abandonment of a Philosophy;vitality;0;0
+Complete abandonment of a Philosophy;agressivity;0;0
+Complete abandonment of a Philosophy;health;1;0
+Complete abandonment of a Philosophy;military;0;0
+Complete abandonment of a Philosophy;New Philosophy;1;1
+
+Complete abandonment of a Technology;type;1;0
+Complete abandonment of a Technology;chance;0.005;0
+Complete abandonment of a Technology;mod;0.005;0
+Complete abandonment of a Technology;modDone;0;0
+Complete abandonment of a Technology;vitality;-1;0
+Complete abandonment of a Technology;agressivity;1;0
+Complete abandonment of a Technology;health;0;0
+Complete abandonment of a Technology;military;-2;0
+Complete abandonment of a Technology;Shipwreck;-2;1
+
+Volcanoe eruption;type;1;0
+Volcanoe eruption;chance;0.001;0
+Volcanoe eruption;mod;0.005;0
+Volcanoe eruption;modDone;0;0
+Volcanoe eruption;vitality;-2;0
+Volcanoe eruption;agressivity;-3;0
+Volcanoe eruption;health;-2;0
+Volcanoe eruption;military;-2;0
+Volcanoe eruption;Forest Fire;2;1
+
+Landslides;type;1;0
+Landslides;chance;0.001;0
+Landslides;mod;0.005;0
+Landslides;modDone;0;0
+Landslides;vitality;-2;0
+Landslides;agressivity;-3;0
+Landslides;health;-2;0
+Landslides;military;-2;0
+Landslides;Strange Sight discovered;1;1
+
+Lunar Eclipse;type;1;0
+Lunar Eclipse;chance;0.01;0
+Lunar Eclipse;mod;0.01;0
+Lunar Eclipse;modDone;0;0
+Lunar Eclipse;vitality;-0.5;0
+Lunar Eclipse;agressivity;-1;0
+Lunar Eclipse;health;0;0
+Lunar Eclipse;military;-0.5;0
+Lunar Eclipse;War;1;1
+
+Solar Eclipses;type;1;0
+Solar Eclipses;chance;0.01;0
+Solar Eclipses;mod;0.01;0
+Solar Eclipses;modDone;0;0
+Solar Eclipses;vitality;-1;0
+Solar Eclipses;agressivity;-4;0
+Solar Eclipses;health;0;0
+Solar Eclipses;military;-1;0
+Solar Eclipses;War;2;1
+
+Meteors Impact;type;1;0
+Meteors Impact;chance;0.001;0
+Meteors Impact;mod;0.001;0
+Meteors Impact;modDone;0;0
+Meteors Impact;vitality;-20;0
+Meteors Impact;agressivity;-20;0
+Meteors Impact;health;-20;0
+Meteors Impact;military;-10;0
+Meteors Impact;Major Fire;-10;1
+
+Comets;type;1;0
+Comets;chance;0.1;0
+Comets;mod;0.1;0
+Comets;modDone;0;0
+Comets;vitality;1;0
+Comets;agressivity;0;0
+Comets;health;2;0
+Comets;military;0;0
+Comets;Meteors Impact;1;1
+
+Disappearance of a known Sight;type;1;0
+Disappearance of a known Sight;chance;0.001;0
+Disappearance of a known Sight;mod;0.001;0
+Disappearance of a known Sight;modDone;0;0
+Disappearance of a known Sight;vitality;-5;0
+Disappearance of a known Sight;agressivity;1;0
+Disappearance of a known Sight;health;0;0
+Disappearance of a known Sight;military;0;0
+Disappearance of a known Sight;War;1;1
+
+Major curse affecting entire nation;type;1;0
+Major curse affecting entire nation;chance;0.01;0
+Major curse affecting entire nation;mod;0.005;0
+Major curse affecting entire nation;modDone;0;0
+Major curse affecting entire nation;vitality;-5;0
+Major curse affecting entire nation;agressivity;-1;0
+Major curse affecting entire nation;health;-5;0
+Major curse affecting entire nation;military;-4;0
+Major curse affecting entire nation;magic;1;0
+Major curse affecting entire nation;precurser;1;0
+Major curse affecting entire nation;Prophet;2;1
+
+Major curse lifted;type;1;0
+Major curse lifted;chance;0.5;0
+Major curse lifted;mod;0.5;0
+Major curse lifted;modDone;0;0
+Major curse lifted;vitality;2;0
+Major curse lifted;agressivity;-2;0
+Major curse lifted;health;3;0
+Major curse lifted;military;1;0
+Major curse lifted;magic;1;0
+Major curse lifted;follows;Major curse affecting entire nation;0
+Major curse lifted;War;0.5;1
+
+Major blessing affecting entire nation;type;1;0
+Major blessing affecting entire nation;chance;0.01;0
+Major blessing affecting entire nation;mod;0.005;0
+Major blessing affecting entire nation;modDone;0;0
+Major blessing affecting entire nation;vitality;5;0
+Major blessing affecting entire nation;agressivity;-1;0
+Major blessing affecting entire nation;health;5;0
+Major blessing affecting entire nation;military;0;0
+Major blessing affecting entire nation;magic;1;0
+Major blessing affecting entire nation;Important Birth;2;1
+
+Curse affecting imporant Family;type;1;0
+Curse affecting imporant Family;chance;0.01;0
+Curse affecting imporant Family;mod;0.01;0
+Curse affecting imporant Family;modDone;0;0
+Curse affecting imporant Family;vitality;1;0
+Curse affecting imporant Family;agressivity;0;0
+Curse affecting imporant Family;health;2;0
+Curse affecting imporant Family;military;0;0
+Curse affecting imporant Family;magic;1;0
+Curse affecting imporant Family;precurser;1;0
+Curse affecting imporant Family;Murder of Ruler;1;1
+
+Curse affecting imporant Family lifted;type;1;0
+Curse affecting imporant Family lifted;chance;0.5;0
+Curse affecting imporant Family lifted;mod;0.5;0
+Curse affecting imporant Family lifted;modDone;0;0
+Curse affecting imporant Family lifted;vitality;1;0
+Curse affecting imporant Family lifted;agressivity;0;0
+Curse affecting imporant Family lifted;health;2;0
+Curse affecting imporant Family lifted;military;0;0
+Curse affecting imporant Family lifted;magic;1;0
+Curse affecting imporant Family lifted;follows;Curse affecting imporant Family;0
+Curse affecting imporant Family lifted;Important Birth;1;1
+
+Witchhunts;type;1;0
+Witchhunts;chance;0.001;0
+Witchhunts;mod;0.001;0
+Witchhunts;modDone;0;0
+Witchhunts;vitality;1;0
+Witchhunts;agressivity;3;0
+Witchhunts;health;-2;0
+Witchhunts;military;1;0
+Witchhunts;Shism;1;1
+
+Death of a god;type;1;0
+Death of a god;chance;0.001;0
+Death of a god;mod;0.001;0
+Death of a god;modDone;-2;0
+Death of a god;vitality;-5;0
+Death of a god;agressivity;-3;0
+Death of a god;health;-5;0
+Death of a god;military;-2;0
+Death of a god;magic;1;0
+Death of a god;Meteors Impact;1;1
+
+Undead army attacks;type;1;0
+Undead army attacks;chance;0.001;0
+Undead army attacks;mod;0.001;0
+Undead army attacks;modDone;0;0
+Undead army attacks;vitality;-5;0
+Undead army attacks;agressivity;0;0
+Undead army attacks;health;-5;0
+Undead army attacks;military;5;0
+Undead army attacks;magic;1;0
+Undead army attacks;City Sacced;1;1
+
+Wizards battling each other;type;1;0
+Wizards battling each other;chance;0.001;0
+Wizards battling each other;mod;0.01;0
+Wizards battling each other;modDone;0;0
+Wizards battling each other;vitality;1;0
+Wizards battling each other;agressivity;0;0
+Wizards battling each other;health;2;0
+Wizards battling each other;military;0;0
+Wizards battling each other;magic;1;0
+Wizards battling each other;Meteors Impact;1;1
+
+Wizards terrorizing countryside, vying for dominion;type;1;0
+Magic Incursion;chance;0.001;0
+Magic Incursion;mod;0.001;0
+Magic Incursion;modDone;0;0
+Magic Incursion;vitality;-1;0
+Magic Incursion;agressivity;1;0
+Magic Incursion;health;0;0
+Magic Incursion;military;1;0
+Magic Incursion;magic;1;0
+Magic Incursion;Artifact destroyed;1;1
+
+Artifact created;type;1;0
+Artifact created;chance;0.001;0
+Artifact created;mod;0.0005;0
+Artifact created;modDone;0;0
+Artifact created;vitality;3;0
+Artifact created;agressivity;0;0
+Artifact created;health;1;0
+Artifact created;military;0;0
+Artifact created;magic;1;0
+Artifact created;Artifact destroyed;0.5;1
+
+Artifact destroyed;type;1;0
+Artifact destroyed;chance;0.001;0
+Artifact destroyed;mod;0.0005;0
+Artifact destroyed;modDone;0;0
+Artifact destroyed;vitality;0;0
+Artifact destroyed;agressivity;0;0
+Artifact destroyed;health;0;0
+Artifact destroyed;military;0;0
+Artifact destroyed;magic;1;0
+Artifact destroyed;Meteors Impact;1;1
+
+School of wizardry opened;type;1;0
+School of wizardry opened;chance;0.001;0
+School of wizardry opened;mod;0.001;0
+School of wizardry opened;modDone;0;0
+School of wizardry opened;vitality;2;0
+School of wizardry opened;agressivity;1;0
+School of wizardry opened;health;5;0
+School of wizardry opened;military;1;0
+School of wizardry opened;magic;1;0
+School of wizardry opened;precurser;1;0
+School of wizardry opened;Wizards battling each other;1;1
+
+School of Wizards closed;type;1;0
+School of Wizards closed;chance;0.001;0
+School of Wizards closed;mod;0.001;0
+School of Wizards closed;modDone;0;0
+School of Wizards closed;vitality;0;0
+School of Wizards closed;agressivity;0;0
+School of Wizards closed;health;1;0
+School of Wizards closed;military;-1;0
+School of Wizards closed;magic;1;0
+School of Wizards closed;follows;School of wizardry opened;0
+School of Wizards closed;Wizards battling each other;1;1
+
