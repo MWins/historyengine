@@ -1,53 +1,87 @@
-<html>
-<head>
-	<title>History Engine</title>
-<script language="JavaScript">
-   function Go(x){
- 		alert ( x );
-      location.href = <?php echo $PHP_SELF?>?pathP=x;
-}
-</script>
- <?php $pathP = './eventList.txt';
- 	include ( "name_array.php" );
- ?>
-</head>
-
-<body>
-<form action="historyEngine.php" method="get">
-<table cellspacing="0" cellpadding="0" border="0">
-<tr>
-    <td>No "Nation dead"</td>
-    <td>'Dead' possible: <input type="radio" name="dead" value="0" checked> Dark Ages: <input type="radio" name="dead" value="1"> 'Crisis' <input type="radio" name="dead" value="2"></td>
-</tr>
-<tr>
-    <td>Print Order</td>
-    <td>AD <input type="radio" name="order" value="0" checked> BC <input type="radio" name="order" value="1"></td>
-</tr>
-<tr>
-    <td>Magical</td>
-    <td>No <input type="radio" name="magic" value="0" checked> Yes <input type="radio" name="magic" value="1"></td>
-</tr>
-<tr>
-    <td>Name of Nation</td>
-    <td><input type="text" name="name" size="20"></td>
-</tr>
-<tr>
-    <td>Start Year</td>
-    <td><input type="text" name="year" value="0"></td>
-</tr>
-<tr>
-    <td>Durration</td>
-    <td><input type="text" name="dur" value="20"></td>
-</tr>
-<tr>
-    <td valign="top">Number of Surrounding Nations</td>
-    <td><select name="numbers"><?php 
-	for ( $i=2; $i<11; $i++ ) {
-		echo "<option";
-		if ( $i==5 ) echo " selected";
-		echo ">$i</option>\n";
+<?php include ( "name_array.php");
+function checkLast ($arr) {
+	global  $languages, $lastLanguages, $langFirst, $langLast, $langEnd;
+	if ( $langLast[$arr] ) {
+		return $langLast[$arr];
+	} else {
+		return $langFirst[$arr];
 	}
-	?></select></td>
+}
+
+function getLast ( $arr, $arr2 ) {
+	global  $languages, $lastLanguages, $langFirst, $langLast, $langEnd;
+	$counter = count ( $arr );
+	$allArray = array ();
+	for ( $i=0; $i< $counter; $i++ ) {
+		$allArray = array_merge (checkLast ( $arr[$i] ), $allArray);
+	}
+
+	if ( is_array ( $arr2 ) ) {
+		$counter = count ( $arr2 );
+		for ( $i=0; $i< $counter; $i++ ) {
+			$allArray = array_merge ($arr2[$i], $allArray);
+		}
+	}
+	#echo $allArray[1];
+	return $allArray;
+}
+
+function conCatArray ($array, $last=0 ) {
+	global  $languages, $lastLanguages, $langFirst, $langLast, $langEnd;
+	$allarray = array ();
+	$counter = count ( $array );
+	if ( $last == 0 ) {
+		for ( $i=0; $i< $counter; $i++ ) {
+			$allarray = array_merge ($langFirst[$array[$i]], $allarray );
+		}
+	} else {
+		$allarray = array_merge ($array, $allarray);
+	}
+
+	return $allarray;
+
+}
+
+function getRand ( $max ) {
+	mt_srand((double)microtime()*100000);
+	if ( $max == "r" ) {
+		return $number = mt_rand(1, mt_rand(1,10))+1;}
+	$number = mt_rand(1, $max);
+	return $number;
+}
+
+function calculateTheNames() {
+	global  $languages, $lastLanguages, $langFirst, $langLast, $langEnd, $HTTP_GET_VARS;
+	$returnNames = array();
+	$frontSyl 		= conCatArray($HTTP_GET_VARS['langA'], 0);
+	$preLastSyl		= getLast ( $HTTP_GET_VARS['langA'], $HTTP_GET_VARS['langB'] );
+	$lastSyl		= conCatArray ( $preLastSyl, 1 );
+	#echo $lastSyl[0];
+	
+	for ( $i=0; $i < $HTTP_GET_VARS['num_names']; $i++ ) {
+		if ( $HTTP_GET_VARS["num_syls"] > 0 ) {
+			$numOfSyls	=	$HTTP_GET_VARS["num_syls"];
+		} else {
+			$numOfSyls = 2;
+		}
+
+		for ($z=0; $z<$numOfSyls; $z++ ) {
+			if ( $z == ($numOfSyls-1)) {
+				$counter = count ( $lastSyl );
+				$sylRand	=	getRand($counter);
+				$returnNames[$i]	.=	$lastSyl[$sylRand];
+			} else {
+				$counter = count ( $frontSyl );
+				$sylRand	=	getRand($counter);
+				$returnNames[$i]	.=	$frontSyl[$sylRand];
+			}
+		
+		}
+
+	}
+	return $returnNames;
+}
+?>
 </tr>
 <tr>
     <td valign="top" width="200">Fixed Nations<br>(Enter the name of a Nation, separate the nations by a comma (,). You can give a date, at which the nation should be destroyed by adding a colon and a number)</td>
